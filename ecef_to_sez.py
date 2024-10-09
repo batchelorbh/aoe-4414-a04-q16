@@ -69,7 +69,7 @@ lon_rad = atan2(o_y_km, o_x_km)
 lon_deg = lon_rad * RAD_TO_DEG
 
 #Initialize lat_rad, r_lon_km, r_z_km
-lat_rad = asin(z_vec_km / sqrt(o_x_km**2 + o_y_km**2 + o_z_km**2))
+lat_rad = asin(o_z_km / sqrt(o_x_km**2 + o_y_km**2 + o_z_km**2))
 r_lon_km = sqrt(o_x_km**2 + o_y_km**2)
 prev_lat_rad = float('nan')
 
@@ -87,7 +87,7 @@ while (isnan(prev_lat_rad) or abs(lat_rad-prev_lat_rad) > 10e-7) and count < 5:
 hae_km = r_lon_km / cos(lat_rad) - c_E
 
 #Rotation matrices
-s_km = x_vec_km * cos(lon_rad) + y_vec_km * sin(lon_rad) \
+s_km = (x_vec_km * cos(lon_rad) + y_vec_km * sin(lon_rad)) \
        * sin(lat_rad) - z_vec_km * cos(lat_rad)
 
 e_km = x_vec_km * -sin(lon_rad) + y_vec_km * cos(lon_rad)
